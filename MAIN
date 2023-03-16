@@ -1,0 +1,80 @@
+package my_projects;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.*;
+
+public class Fbpage 
+{
+  	public static void main(String[]argu)
+                   {       
+		                        JFrame frame=new JFrame("LOGIN PAGE");
+			   frame.setLocation(500, 300);
+			   frame.setLayout(null);
+			   frame.setVisible(true);
+			
+			 JLabel l=new JLabel("Username:-");
+			 l.setBounds(100, 108, 80, 20);
+			 frame.add(l);
+			
+			JTextField t=new JTextField();
+			t.setBounds(180, 110, 170, 20);
+			frame.add(t);
+			
+			JLabel l1=new JLabel("Password:-");
+			l1.setBounds(100, 150, 80, 20);
+			frame.add(l1);
+			
+			JPasswordField t1=new JPasswordField();
+			t1.setBounds(180, 152, 170, 20);
+			frame.add(t1);
+			
+			JButton b=new JButton("LOGIN");
+			
+			b.addActionListener((ActionListener) new ActionListener() 
+			{
+				
+
+				@SuppressWarnings("deprecation")
+				public void actionPerformed(ActionEvent e) 
+				{
+					try
+					{
+						Class.forName("com.mysql.cj.jdbc.Driver");
+				Connection        con=DriverManager.getConnection("jdbc:mysql://localhost:3306/Facebook","root","Rohit@2000");
+						Statement s=(Statement) con.createStatement();
+						String s1="select * from home where username='"+t.getText()+"'and password='"+t1.getText()+"'";
+						
+						ResultSet rs=((java.sql.Statement) s).executeQuery(s1);
+						
+						System.out.println(s1);
+						
+						if(rs.next())
+						{
+							JOptionPane.showMessageDialog(null,"Successfully login..");
+						    
+							frame.dispose();
+						    Newpage n=new Newpage();
+							n.main(argu);
+						 }
+					                     else
+						{
+							JOptionPane.showMessageDialog(null,"Invalide Inpute");
+						}
+							
+						con.close();
+					}
+					catch(Exception e1)
+					{
+						System.out.println(e1);
+						
+				    }
+			}
+                });
+			b.setBounds(250, 200, 80, 30);
+			frame.add(b);
+		}
+}
