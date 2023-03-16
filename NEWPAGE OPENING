@@ -1,0 +1,32 @@
+  NEW PAGE -
+
+package my_projects;
+
+import java.awt.Color;
+
+import javax.swing.*;
+
+public class Newpage 
+{
+	public static void main(String[]str)
+	{
+	
+		JFrame j=new JFrame("Welcome to Facebook");
+		j.setSize(500, 500);
+		j.setLayout(null);
+		j.setVisible(true);
+		
+		JLabel l=new JLabel("Rohit Pawar");
+		l.setBounds(150, 50, 200, 50);
+		l.setBackground(Color.BLUE);
+		l.setForeground(Color.BLUE);
+		l.setSize(500, 100);
+		j.add(l);
+		
+		JLabel l2=new JLabel();
+		l2.setIcon(new ImageIcon("fbImage.png"));
+		l2.setBounds(30, 150, 1500, 300);
+		j.add(l2);
+	
+	}
+}
